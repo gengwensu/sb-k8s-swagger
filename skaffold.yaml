@@ -1,0 +1,44 @@
+apiVersion: skaffold/v2beta7
+kind: Config
+metadata:
+  name: spring-microservices-hubernetes
+build:
+  artifacts:
+    - image: gateway
+      jib:
+        project: gateway-service
+    - image: organization
+      jib:
+        project: organization-service
+    - image: department
+      jib:
+        project: department-service
+    - image: employee
+      jib:
+        project: employee-service
+  tagPolicy:
+    sha256: {}
+deploy:
+  kubectl:
+    manifests:
+      - ./kubernetes-manifests/ingress.yaml
+      - ./kubernetes-manifests/*.configmap.yaml
+      - ./kubernetes-manifests/*.secret.yaml
+      - ./kubernetes-manifests/*.service.yaml
+      - ./kubernetes-manifests/*.deployment.yaml
+profiles:
+  - name: cloudbuild
+    build:
+      googleCloudBuild: {}
+  - name: dockerfile
+    build:
+      artifacts:
+        - image: gateway
+          context: gateway-service
+        - image: organization
+          context: organization-service
+        - image: department
+          context: department-service
+        - image: employee
+          context: employee-service
+

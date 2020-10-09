@@ -1,0 +1,8 @@
+/.project
+/.settings/
+/.idea/$PRODUCT_WORKSPACE_FILE$
+/.idea/.gitignore
+/.idea/compiler.xml
+/.idea/encodings.xml
+/.DS_Store
+/spmk.iml
