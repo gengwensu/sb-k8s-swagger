@@ -9,6 +9,8 @@ spring:
       discovery:
         locator:
           enabled: true
+      httpclient:
+        wiretap: true
       routes:
         - id: employee
           uri: lb://employee
@@ -29,5 +31,32 @@ spring:
           filters:
             - RewritePath=/organization/(?<path>.*), /$\{path}
 logging:
-  pattern: 
+  pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    #    org.springframework.http.server.reactive: DEBUG
+    #    org.springframework.web.reactive: DEBUG
+    #    org.springframework.cloud.loadbalancer: TRACE
+    reactor.netty.http.client: DEBUG
+    reactor.netty.http.server.AccessLog: INFO
+management:
+  endpoints:
+    gateway:
+      enabled: true
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      enabled: true
+    restart:
+      enabled: true
+    info:
+      enabled: true
+reactor:
+  netty:
+    http:
+      server:
+        accessLogEnabled: true
+

@@ -9,18 +9,23 @@ spec:
     serviceName: default-http-backend
     servicePort: 80
   rules:
-  - host: microservices.info
-    http:
-      paths:
-      - path: /employee
-        backend:
-          serviceName: employee
-          servicePort: 8080
-      - path: /department
-        backend:
-          serviceName: department
-          servicePort: 8080
-      - path: /organization
-        backend:
-          serviceName: organization
-          servicePort: 8080
+    - host: test.com
+      http:
+        paths:
+        - backend:
+            serviceName: gateway
+            servicePort: 8080
+    - http:
+        paths:
+        - path: /employee
+          backend:
+            serviceName: employee
+            servicePort: 8080
+        - path: /department
+          backend:
+            serviceName: department
+            servicePort: 8080
+        - path: /organization
+          backend:
+            serviceName: organization
+            servicePort: 8080
