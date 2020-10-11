@@ -9,12 +9,12 @@ spec:
     serviceName: default-http-backend
     servicePort: 80
   rules:
-    - host: test.com
-      http:
-        paths:
-        - backend:
-            serviceName: gateway
-            servicePort: 8080
+#    - host: test.com
+#      http:
+#        paths:
+#        - backend:
+#            serviceName: gateway
+#            servicePort: 8080
     - http:
         paths:
         - path: /employee
